@@ -1,0 +1,13 @@
+{
+    "plugin-data":
+    {
+        "name": "Preload",
+        "description": "Affiche une page d'attente durant le chargement"
+    },
+	"inside-head-tag": "Inserer votre code Head ici :",
+	"inside-head-tag-desc": "Ce contenu sera afficher entre les balises 'HEAD'",
+	"after-body-begin": "Inserer votre code de début de Body ici :",
+	"after-body-begin-desc": "Ce contenu sera afficher juste aprés l'ouverture de la balise 'BODY'",
+	"before-body-end": "Inserer votre code de fin de Body ici :",
+	"before-body-end-desc": "Ce contenu sera afficher juste avant la fermeture de la balise 'BODY'"
+}
