@@ -1,0 +1,13 @@
+{
+    "plugin-data":
+    {
+        "name": "Preload",
+        "description": "Show a waiting page during the loading"
+    },
+	"inside-head-tag": "Put your Head code here :",
+	"inside-head-tag-desc": "This content will be inside 'HEAD' tag",
+	"after-body-begin": "Put your Body Begin here :",
+	"after-body-begin-desc": "This content will be after open of 'BODY' tag",
+	"before-body-end": "Put your Body End here :",
+	"before-body-end-desc": "Your content will be before 'BODY' tag closed"
+}
