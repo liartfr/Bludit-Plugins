@@ -1,0 +1,8 @@
+{
+    "plugin-data":
+    {
+        "name": "Membres",
+        "description": "Permet d'afficher la liste des membres directement sur le site."
+    },
+	 "what_you_want_to_see": "Quelle information voulez-vous afficher sur le site ?"
+}
