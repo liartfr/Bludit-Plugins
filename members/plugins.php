@@ -4,20 +4,20 @@ class pluginmembers extends Plugin {
 	{
 		// Fields and default values for the database of this plugin
 		$this->dbFields = array(
-			'username'=>true,
-			'nickname'=>true,
-			'last-Name'=>true,
-			'first-Name'=>true,
-			'role'=>true,
-			'email'=>true,
-			'twitter'=>true,
-			'facebook'=>true,
-			'googlePlus'=>true,
-			'instagram'=>true,
-			'codepen'=>true,
-			'linkedin'=>true,
-			'github'=>true,
-			'gitlab'=>true
+			'username'=>false,
+			'nickname'=>false,
+			'last-name'=>false,
+			'first-name'=>false,
+			'role'=>false,
+			'email'=>false,
+			'twitter'=>false,
+			'facebook'=>false,
+			'googlePlus'=>false,
+			'instagram'=>false,
+			'codepen'=>false,
+			'linkedin'=>false,
+			'github'=>false,
+			'gitlab'=>false
 		);
 	}
 	
@@ -83,8 +83,6 @@ class pluginmembers extends Plugin {
 	public function form()
 	{
 		global $L;
-		global $users;
-		
 		$html  = '<div class="alert alert-primary" role="alert">'.PHP_EOL;
 		$html .= $this->description();
 		$html .= '</div>'.PHP_EOL;
@@ -93,13 +91,13 @@ class pluginmembers extends Plugin {
 	
 		foreach ($this->dbFields as $key => $value) {
 			try {
-				
+				if ($this->getValue($key) == true){$returnvalue = true;echo " hey dude ";}
 				$html .=  Bootstrap::formCheckbox(array(
 					'name'=> $key,
 					'label'=>'',
 					'labelForCheckbox'=>$L->g($key),
 					'placeholder'=>'',
-					'checked'=> $value,
+					'checked'=> $returnvalue,
 					'tip'=>''
 				)).PHP_EOL;
 					} catch (Exception $e) {
