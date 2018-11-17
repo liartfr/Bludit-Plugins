@@ -5,6 +5,7 @@ class pluginMembers extends Plugin {
     public function init()
     {
         // Fields and default values for the database of this plugin
+								// For Privacy reason, All value start with "false" attribut.
         $this->dbFields = array(
             'username'=>false,
             'nickname'=>false,
@@ -80,7 +81,7 @@ class pluginMembers extends Plugin {
 
         foreach ($this->dbFields as $key => $value) {
             try {
-                if ($this->getValue($key) == true){$returnvalue = true;echo " hey dude ";}
+                if ($this->getValue($key) == true){$returnvalue = true;}else{$returnvalue = false;}
                 $html .=  Bootstrap::formCheckbox(array(
                     'name'=> $key,
                     'label'=>'',
@@ -89,7 +90,9 @@ class pluginMembers extends Plugin {
                     'checked'=> $returnvalue,
                     'tip'=>''
                 )).PHP_EOL;
-                    } catch (Exception $e) {
+                    
+												
+												} catch (Exception $e) {
                 // Continue
             }
         }
