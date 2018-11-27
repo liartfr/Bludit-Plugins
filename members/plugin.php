@@ -13,8 +13,7 @@ public function init()
 		$user = new User($username);
 		if (empty($this->dbFields)){
 			$this->dbFields = array($username => false);
-		}
-		else{
+		} else {
 			$this->dbFields = array_merge($this->dbFields, array($username => false));
 		}
 		} catch (Exception $e) {
@@ -64,14 +63,12 @@ public function siteBodyBegin()
 		if (empty($this->username)) {
 			$s_member = false;   
 			//exit('Without username defined');
-		} 
-		else {
+		} else {
 			$s_member = true;  
 			if (array_key_exists($this->username, $this->dbFields)) {
 					$s_member_exist = true;
 					$selected_member = $this->username;
-			}
-			else{
+			} else{
 				$s_member_exist = false;
 				$selected_member = $this->username; //debug
 			}
@@ -124,14 +121,5 @@ public function form()
 
 	return $html;
 } // End form
-
-
-
-
-
-
-
-
-
 
 } //end plugin
