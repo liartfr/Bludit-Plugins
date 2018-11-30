@@ -1,3 +1,5 @@
+### How to :
+
 1 - To use the plugins, you have to add the members.php page into your {yourtheme}/php/ section.
 
 2 - You have to add :
