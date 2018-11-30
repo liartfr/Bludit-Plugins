@@ -72,8 +72,8 @@ public function siteBodyBegin()
 
 			$selected_member = $this->username;
 			if ($this->getValue($selected_member)===true){
-								$s_member_exist = true;
-						//var_dump('Username defined: '.$this->username);
+			$s_member_exist = true;
+			//var_dump('Username defined: '.$this->username);
 			}
 		}
 	} //endif webhook
