@@ -5,6 +5,4 @@
 2 - You have to add :
 	elseif ($WHERE_AM_I == 'members') {
 			include(THEME_DIR_PHP.'membres.php');
-	}
-  
-  into your index.php page.
+	}  into your index.php page.
