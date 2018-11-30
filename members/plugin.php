@@ -1,6 +1,8 @@
 <?php
 class pluginMembers extends Plugin {
 private $s_member=null;
+private $s_member_exist=null;
+private $selected_member=null;
 public function init()
 {
 	// We collect the list of members
@@ -34,9 +36,9 @@ public function beforeAll()
 	global $s_member;
 	$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
 
-		// Get username from URI
-		$this->username = $this->webhook($webhook, true, false);
-		$this->username = trim($this->username, '/');
+	// Get username from URI
+	$this->username = $this->webhook($webhook, true, false);
+	$this->username = trim($this->username, '/');
 
 	if (empty($this->username)) {
 		$s_member = false;   
@@ -56,6 +58,8 @@ public function siteBodyBegin()
 		global $url;
 		global $WHERE_AM_I;
 		global $s_member;
+		global $s_member_exist;
+		global $selected_member;
 		$url->setWhereAmI($webhook);
 		// Get the pre-defined variable from the rule 69.pages.php
 		// We change the content to show in the website
@@ -65,14 +69,12 @@ public function siteBodyBegin()
 			//exit('Without username defined');
 		} else {
 			$s_member = true;  
-			if (array_key_exists($this->username, $this->dbFields)) {
-					$s_member_exist = true;
-					$selected_member = $this->username;
-			} else{
-				$s_member_exist = false;
-				$selected_member = $this->username; //debug
+
+			$selected_member = $this->username;
+			if ($this->getValue($selected_member)===true){
+								$s_member_exist = true;
+						//var_dump('Username defined: '.$this->username);
 			}
-		//var_dump('Username defined: '.$this->username);
 		}
 	} //endif webhook
 } // End siteBodyBegin
