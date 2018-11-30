@@ -1,8 +1,15 @@
 {
     "plugin-data":
     {
-        "name": "Membres",
+        "name": "Members",
         "description": "View the list of members directly on the site"
     },
-	 "what_you_want_to_see": "What information do you want to display on the website ?"
+		"members": "Members",
+	 "what_you_want_to_see": "What information do you want to display on the website ?",
+	 "who_do_you_want_to_see": "Which member would you like to display on the website ?",
+		"display": "display",
+		"hide": "hide",
+		"all_members": "List of all members",
+	 "hidden_member": "This member don't exist or don't want to show is profile"
+
 }
