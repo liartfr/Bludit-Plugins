@@ -4,5 +4,12 @@
         "name": "Membres",
         "description": "Permet d'afficher la liste des membres directement sur le site."
     },
-	 "what_you_want_to_see": "Quelle information voulez-vous afficher sur le site ?"
+		"members": "Membres",
+	 "what_you_want_to_see": "Quelle information voulez-vous afficher sur le site ?",
+		"who_do_you_want_to_see": "Quel membre voulez-vous afficher sur le site ?",
+		"display": "afficher",
+		"hide": "cacher",
+	 "all_members": "Liste complète des membres",
+		 "hidden_member": "Ce membre n'existe pas ou ne souhaite pas afficher son profil"
+
 }
