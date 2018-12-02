@@ -22,10 +22,7 @@ public function init()
 		// Continue
 		}
 	} // End of foreach
-
 }  //end of INIT
-
-
 public function beforeAll()
 {
 	// Check if the URL match with the webhook
@@ -35,11 +32,9 @@ public function beforeAll()
 	global $url;
 	global $s_member;
 	$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
-
 	// Get username from URI
 	$this->username = $this->webhook($webhook, true, false);
 	$this->username = trim($this->username, '/');
-
 	if (empty($this->username)) {
 		$s_member = false;   
 	//var_dump('Without username defined');
@@ -47,10 +42,8 @@ public function beforeAll()
 		$s_member = $this->username;     
 	//var_dump('Username defined: '.$this->username);
 	}
-
 	}
 }
-
 public function siteBodyBegin()
 {
 	$webhook = 'members';
@@ -63,13 +56,11 @@ public function siteBodyBegin()
 		$url->setWhereAmI($webhook);
 		// Get the pre-defined variable from the rule 69.pages.php
 		// We change the content to show in the website
-
 		if (empty($this->username)) {
 			$s_member = false;   
 			//exit('Without username defined');
 		} else {
 			$s_member = true;  
-
 			$selected_member = $this->username;
 			if ($this->getValue($selected_member)===true){
 			$s_member_exist = true;
@@ -78,30 +69,22 @@ public function siteBodyBegin()
 		}
 	} //endif webhook
 } // End siteBodyBegin
-
-
-
 public function form()
 {
 	global $L;
 	global $users;
 	$list = $users->keys();
-
 	// Light customized form
 	$html = '<style>.col-md-4{text-transform:uppercase;}.col-md-4 label{border-bottom:1px dotted grey;width:200px;}.col-md-4 select{height:30px;width:200px;text-transform: uppercase;}';
 	$html .= '.col-md-4 label{ }';
 	$html .= '</style>'.PHP_EOL;
-
 	$html  .= '<div class="alert alert-primary" role="alert">'.PHP_EOL;
 	$html .= $this->description();
 	$html .= '</div>'.PHP_EOL;
-
-
 	// Who do you want to see ?
 	$html .= '<div style="border:1px solid #ccc;padding:10px;border-radius:5px;">'.PHP_EOL;
 	$html .= '<h5 style="text-decoration:underline;">'.$L->get('who_do_you_want_to_see').' </h5>'.PHP_EOL;
 	$html .= '<div class="row">';
-
 	$list = $users->keys();
 	foreach ($list as $username) {
 		try {
@@ -117,11 +100,8 @@ public function form()
 		// Continue
 		}
 	} //foreach username
-
 	$html .= '</div>';
 	$html .= '</div>'.PHP_EOL;
-
 	return $html;
 } // End form
-
 } //end plugin
