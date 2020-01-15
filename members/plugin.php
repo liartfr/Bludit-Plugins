@@ -8,13 +8,13 @@ public function init()
 	// For Privacy reason (like RGPD), All value start with "false" attribut.
 	global $users;
 	$list = $users->keys();
-	foreach ($list as $username) {
+	foreach ($list as $nickname) {
 		try {
-		$user = new User($username);
+		$user = new User($nickname);
 		if (empty($this->dbFields)){
-			$this->dbFields = array($username => false);
+			$this->dbFields = array($nickname => false);
 		} else {
-			$this->dbFields = array_merge($this->dbFields, array($username => false));
+			$this->dbFields = array_merge($this->dbFields, array($nickname => false));
 		}
 		} catch (Exception $e) {
 		// Continue
@@ -40,14 +40,14 @@ public function form()
 	$html .= '<h5 style="text-decoration:underline;">'.$L->get('who_do_you_want_to_see').' </h5>'.PHP_EOL;
 	$html .= '<div class="row">';
 	$list = $users->keys();
-	foreach ($list as $username) {
+	foreach ($list as $nickname) {
 		try {
-			$user = new User($username);
+			$user = new User($nickname);
 			$html .= '<div class="col-md-4">'.PHP_EOL;
-			$html .= '<label>'.$username.'</label>'.PHP_EOL;
-			$html .= '<select name="'.$username.'">'.PHP_EOL;
-			$html .= '<option value="1" '.($this->getValue($username)===true?'selected':'').'>'.$L->get('display').'</option>'.PHP_EOL;
-			$html .= '<option value="0" '.($this->getValue($username)===false?'selected':'').'>'.$L->get('hide').'</option>'.PHP_EOL;
+			$html .= '<label>'.$nickname.'</label>'.PHP_EOL;
+			$html .= '<select name="'.$nickname.'">'.PHP_EOL;
+			$html .= '<option value="1" '.($this->getValue($nickname)===true?'selected':'').'>'.$L->get('display').'</option>'.PHP_EOL;
+			$html .= '<option value="0" '.($this->getValue($nickname)===false?'selected':'').'>'.$L->get('hide').'</option>'.PHP_EOL;
 			$html .= '</select>'.PHP_EOL;
 			$html .= '</div>'.PHP_EOL;
 		} catch (Exception $e) {
@@ -63,41 +63,55 @@ public function form()
 
 public function beforeAll()
 {
-	// Check if the URL match with the webhook
-	$webhook = 'membres';
-	if ($this->webhook($webhook, false, false)) {
+	//var & paramèters
 	global $url;
-	$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
-
-	// Get the string to search from the URL
 	global $s_member;
-	$s_member = $this->webhook($webhook, true, false);
-	$s_member = trim($s_member, '/');
+	$webhook = 'membres';
+
+	// Check if the URL match with the webhook
+	if ($this->webhook($webhook, false, false)) {
+		$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
+		// Get the string to search from the URL
+		$s_member = $this->webhook($webhook, true, false);
+		$s_member = trim($s_member, '/');
 	}
 }
-public function siteBodyBegin()
-{
-
-
-} // End siteBodyBegin
 
 
 public function pageBegin()
 {
 	// We collect the data from $s_member;
 	global $s_member;
+
 	if ($s_member == null){
 		// No selected member, we put the list of all the members
 		echo 'personne !';
 	}
 	else{
 
-		if ($this->getValue($s_member) === true){
-			echo $s_member.' affiche ses données';
-		}
-		else{
-			echo $s_member.' n\'affiche pas ses données.';
-		}
+		// if we found the user in the member plugins.
+		if (array_key_exists($s_member, $this->dbFields)) {
+			// we check if the user wants to display his data
+			if ($this->getValue($s_member) === true){
+				echo $s_member.' affiche ses données';
+			}
+			else // if not
+			{
+				echo $s_member.' n\'affiche pas ses données.';
+			}
+
+
+		}else{ // we don't found the selected user.
+
+				echo 'erreur not found';
+
+
+
+			}
+
+
+
+
 
 	}
 
