@@ -1,8 +1,6 @@
 <?php
 class pluginMembers extends Plugin {
 private $s_member=null;
-private $s_member_exist=null;
-private $selected_member=null;
 public function init()
 {
 	// We collect the list of members
@@ -23,52 +21,8 @@ public function init()
 		}
 	} // End of foreach
 }  //end of INIT
-public function beforeAll()
-{
-	// Check if the URL match with the webhook
-	$webhook = 'members';
-	if ($this->webhook($webhook, false, false)) {
-	global $site;
-	global $url;
-	global $s_member;
-	$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
-	// Get username from URI
-	$this->username = $this->webhook($webhook, true, false);
-	$this->username = trim($this->username, '/');
-	if (empty($this->username)) {
-		$s_member = false;   
-	//var_dump('Without username defined');
-	} else {
-		$s_member = $this->username;     
-	//var_dump('Username defined: '.$this->username);
-	}
-	}
-}
-public function siteBodyBegin()
-{
-	$webhook = 'members';
-	if ($this->webhook($webhook, false, false)) {
-		global $url;
-		global $WHERE_AM_I;
-		global $s_member;
-		global $s_member_exist;
-		global $selected_member;
-		$url->setWhereAmI($webhook);
-		// Get the pre-defined variable from the rule 69.pages.php
-		// We change the content to show in the website
-		if (empty($this->username)) {
-			$s_member = false;   
-			//exit('Without username defined');
-		} else {
-			$s_member = true;  
-			$selected_member = $this->username;
-			if ($this->getValue($selected_member)===true){
-			$s_member_exist = true;
-			//var_dump('Username defined: '.$this->username);
-			}
-		}
-	} //endif webhook
-} // End siteBodyBegin
+
+
 public function form()
 {
 	global $L;
@@ -104,4 +58,51 @@ public function form()
 	$html .= '</div>'.PHP_EOL;
 	return $html;
 } // End form
+
+
+
+public function beforeAll()
+{
+	// Check if the URL match with the webhook
+	$webhook = 'membres';
+	if ($this->webhook($webhook, false, false)) {
+	global $url;
+	$url->setWhereAmI($webhook); // THE CORRECT WEBHOOK !!!
+
+	// Get the string to search from the URL
+	global $s_member;
+	$s_member = $this->webhook($webhook, true, false);
+	$s_member = trim($s_member, '/');
+	}
+}
+public function siteBodyBegin()
+{
+
+
+} // End siteBodyBegin
+
+
+public function pageBegin()
+{
+	// We collect the data from $s_member;
+	global $s_member;
+	if ($s_member == null){
+		// No selected member, we put the list of all the members
+		echo 'personne !';
+	}
+	else{
+
+		if ($this->getValue($s_member) === true){
+			echo $s_member.' affiche ses données';
+		}
+		else{
+			echo $s_member.' n\'affiche pas ses données.';
+		}
+
+	}
+
+} // end pagebegin
+
+
+
 } //end plugin
